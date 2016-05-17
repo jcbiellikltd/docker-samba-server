@@ -1,8 +1,0 @@
-#!/usr/bin/with-contenv sh
-
-addgroup -g ${GID} ${GROUP}
-adduser -S -G ${GROUP} -u ${UID} -H -D ${USERNAME}
-echo "${PASSWORD}" | tee - | smbpasswd -s -c /config/smb.conf -a ${USERNAME}
-
-nmbd --foreground --log-stdout --configfile=/config/smb.conf &
-smbd --foreground --log-stdout --configfile=/config/smb.conf

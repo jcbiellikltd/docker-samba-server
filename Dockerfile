@@ -5,6 +5,7 @@ ENV USERNAME samba
 ENV GID 1000
 ENV GROUP samba
 ENV PASSWORD password
+ENV CONFIG /config/smb.conf
 
 RUN set -xe \
 	&& apk add --update --no-progress samba-common-tools samba-server openssl \
@@ -22,10 +23,8 @@ RUN set -xe \
 	&& apk del gpg \
 	&& rm -rf /tmp/s6-overlay-amd64.tar.gz /tmp/s6-overlay-amd64.tar.gz.sig /root/.gnupg /var/cache/apk/*
 
-COPY samba.s6 /etc/services.d/samba/run
-
-RUN mkdir /config
-VOLUME ["/config"]
+COPY run.s6 /etc/services.d/samba/run
+COPY finish.s6 /etc/services.d/samba/finish
 
 EXPOSE 137/udp 138/udp 139/tcp 445/tcp
 
