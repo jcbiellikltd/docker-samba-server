@@ -1,4 +1,6 @@
 # Samba server
+[![Docker Pulls](https://img.shields.io/docker/pulls/joebiellik/samba-server.svg)](https://hub.docker.com/r/joebiellik/samba-server/)
+
 [Samba 4](https://www.samba.org/) server running under [s6 overlay](https://github.com/just-containers/s6-overlay) on [Alpine Linux](https://hub.docker.com/_/alpine/). Runs both `smbd` and `nmbd` services.
 
 ## Configuration
