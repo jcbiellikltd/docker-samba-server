@@ -11,13 +11,13 @@ RUN set -xe \
 	&& apk add --update --no-progress samba-common-tools samba-server openssl \
 	&& rm -rf /var/cache/apk/*
 
-ENV S6_VERSION 1.17.2.0
+ENV S6_VERSION 1.18.1.5
 RUN set -xe \
 	&& cd /tmp \
 	&& wget https://github.com/just-containers/s6-overlay/releases/download/v$S6_VERSION/s6-overlay-amd64.tar.gz \
 	&& wget https://github.com/just-containers/s6-overlay/releases/download/v$S6_VERSION/s6-overlay-amd64.tar.gz.sig \
 	&& apk add --update --no-progress --virtual gpg gnupg \
-	&& gpg --keyserver pgp.mit.edu --recv-key 0x337EE704693C17EF \
+	&& wget -q -O - https://keybase.io/justcontainers/key.asc | gpg --import \
 	&& gpg --verify /tmp/s6-overlay-amd64.tar.gz.sig /tmp/s6-overlay-amd64.tar.gz \
 	&& tar xzf s6-overlay-amd64.tar.gz -C / \
 	&& apk del gpg \
