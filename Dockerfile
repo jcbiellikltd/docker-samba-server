@@ -1,30 +1,18 @@
 FROM alpine:latest
 
-ENV UID 1000
 ENV USERNAME samba
-ENV GID 1000
-ENV GROUP samba
 ENV PASSWORD password
-ENV CONFIG /config/smb.conf
+ENV UID 1000
+ENV GID 1000
 
-RUN set -xe \
-	&& apk add --update --no-progress samba-common-tools samba-server openssl \
-	&& rm -rf /var/cache/apk/*
+RUN apk add --no-cache samba-server samba-common-tools openssl
 
-ENV S6_VERSION 1.18.1.5
-RUN set -xe \
-	&& cd /tmp \
-	&& wget https://github.com/just-containers/s6-overlay/releases/download/v$S6_VERSION/s6-overlay-amd64.tar.gz \
-	&& wget https://github.com/just-containers/s6-overlay/releases/download/v$S6_VERSION/s6-overlay-amd64.tar.gz.sig \
-	&& apk add --update --no-progress --virtual gpg gnupg \
-	&& wget -q -O - https://keybase.io/justcontainers/key.asc | gpg --import \
-	&& gpg --verify /tmp/s6-overlay-amd64.tar.gz.sig /tmp/s6-overlay-amd64.tar.gz \
-	&& tar xzf s6-overlay-amd64.tar.gz -C / \
-	&& apk del gpg \
-	&& rm -rf /tmp/s6-overlay-amd64.tar.gz /tmp/s6-overlay-amd64.tar.gz.sig /root/.gnupg /var/cache/apk/*
+ADD https://github.com/just-containers/s6-overlay/releases/download/v1.21.2.1/s6-overlay-amd64.tar.gz /tmp/
+RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
 
-COPY run.s6 /etc/services.d/samba/run
-COPY finish.s6 /etc/services.d/samba/finish
+COPY s6/config.init /etc/cont-init.d/00-config
+COPY s6/smbd.run /etc/services.d/smbd/run
+COPY s6/nmbd.run /etc/services.d/nmbd/run
 
 EXPOSE 137/udp 138/udp 139/tcp 445/tcp
 

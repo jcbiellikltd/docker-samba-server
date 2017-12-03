@@ -3,7 +3,7 @@ samba:
 
   volumes:
     # You must provide a Samba config file
-    - ./smb.conf:/config/smb.conf
+    - ./smb.conf:/etc/samba/smb.conf
 
     # Shares
     - ~/projects:/mnt/projects
@@ -19,8 +19,6 @@ samba:
     - USERNAME=joe
     - PASSWORD=samba
 
-    # Defaults
-    - UID=1000
-    - GID=1000
-    - GROUP=samba
-    - CONFIG=/config/smb.conf
+    # Uncomment to override defaults
+    # - UID=1000
+    # - GID=1000
