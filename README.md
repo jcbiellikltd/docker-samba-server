@@ -19,7 +19,7 @@ samba:
 
   volumes:
     # You must provide a Samba config file
-    - ./smb.conf:/config/smb.conf
+    - ./smb.conf:/etc/samba/smb.conf
 
     # Shares
     - ~/projects:/mnt/projects
