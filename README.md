@@ -2,8 +2,8 @@
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/joebiellik/samba-server.svg)](https://hub.docker.com/r/joebiellik/samba-server/)
 [![Docker Stars](https://img.shields.io/docker/stars/joebiellik/samba-server.svg)](https://hub.docker.com/r/joebiellik/samba-server/)
-[![Docker Build](https://img.shields.io/docker/automated/joebiellik/samba-server.svg)](https://hub.docker.com/r/joebiellik/samba-server/)
-[![Docker Build Status](https://img.shields.io/docker/build/joebiellik/samba-server.svg)](https://hub.docker.com/r/joebiellik/samba-server/)
+[![Docker Build](https://img.shields.io/docker/cloud/automated/joebiellik/samba-server.svg)](https://hub.docker.com/r/joebiellik/samba-server/)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/joebiellik/samba-server.svg)](https://hub.docker.com/r/joebiellik/samba-server/)
 
 [Samba 4](https://www.samba.org/) server running under [s6 overlay](https://github.com/just-containers/s6-overlay) on [Alpine Linux](https://hub.docker.com/_/alpine/). Runs both `smbd` and `nmbd` services.
 
